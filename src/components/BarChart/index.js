@@ -71,9 +71,10 @@ export default class BarChart extends React.Component {
     console.log('TODO: Margin/pad datasets...')
     const gridMaxValue = this.getGridMaxValue()
     const dataSetsBars = dataSets.map(dataSet => {
-      return dataSet.data.map(data => {
+      return dataSet.data.map((data, index) => {
         return (
           <Bar
+            key={`${dataSet.fillColor}${index}`}
             fillColor={dataSet.fillColor}
             horizontal={horizontal}
             value={data.value}
