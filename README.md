@@ -1,5 +1,8 @@
 # react-native-charts
-Configurable, animated react-native charting library– (right now just bar charts).   
+Configurable, animated react-native charting library– (right now just bar charts). 
+
+![screen shot 2015-09-02 at 7 23 31 pm](https://cloud.githubusercontent.com/assets/1638987/9647197/8ec828e0-51a8-11e5-8257-35986fa76bf5.png)
+  
 
 ### Example
 ```javascript
