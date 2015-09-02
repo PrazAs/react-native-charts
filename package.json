@@ -1,0 +1,27 @@
+{
+  "name": "react-native-charts",
+  "version": "1.0.0",
+  "description": "Delightfully-animated data visualization.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "PrazAs, Inc",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PrazAs/react-native-charts.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "bar",
+    "chart",
+    "react-native",
+    "react-component"
+  ],
+  "bugs": {
+    "url": "https://github.com/PrazAs/react-native-charts/issues"
+  },
+  "homepage": "https://github.com/PrazAs/react-native-charts#readme"
+}
