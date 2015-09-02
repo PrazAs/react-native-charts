@@ -37,7 +37,7 @@ import { BarChart } from 'react-native-charts'
 ```
 
 ### TODO
-- [] Render labels for BarChart data
-- [] Other chart types `¯\_(ツ)_/¯`
+- [ ] Render labels for BarChart data
+- [ ] Other chart types `¯\_(ツ)_/¯`
 
 Pull requests welcome!
