@@ -1,5 +1,5 @@
 # react-native-charts
-Configurable react-native charting library– (right now just bar charts).
+Configurable, animated react-native charting library– (right now just bar charts).   
 
 ### Example
 ```javascript
@@ -35,3 +35,9 @@ import { BarChart } from 'react-native-charts'
     margin: 15,
   }}/>
 ```
+
+### TODO
+- [] Render labels for BarChart data
+- [] Other chart types `¯\_(ツ)_/¯`
+
+Pull requests welcome!
