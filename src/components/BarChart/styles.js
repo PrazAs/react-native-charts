@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native'
 
-export default ({ barSize, barSpacing, barStyle, horizontal }) => {
+export default ({ barSize, barSpacing, horizontal }) => {
   let barsFlexDirection
   let barSpacingStyle
   let barsSpacingStyle
@@ -27,7 +27,6 @@ export default ({ barSize, barSpacing, barStyle, horizontal }) => {
     },
     bar: {
       ...barSpacingStyle,
-      ...barStyle,
     },
   })
 }

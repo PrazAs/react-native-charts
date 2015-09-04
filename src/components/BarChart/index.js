@@ -63,6 +63,7 @@ export default class BarChart extends React.Component {
 
   renderBars() {
     const {
+      barStyle,
       dataSets,
       horizontal,
     } = this.props
@@ -79,7 +80,7 @@ export default class BarChart extends React.Component {
             horizontal={horizontal}
             value={data.value}
             maxValue={gridMaxValue}
-            style={this.getStyles().bar}/>
+            style={[this.getStyles().bar, barStyle]}/>
         )
       })
     })
