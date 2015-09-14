@@ -1,6 +1,7 @@
 import { StyleSheet } from 'react-native'
+import _ from 'underscore'
 
-export default ({ barSize, barSpacing, horizontal }) => {
+export default _.memoize(({ barSize, barSpacing, horizontal }) => {
   let barsFlexDirection
   let barSpacingStyle
   let barsSpacingStyle
@@ -29,4 +30,4 @@ export default ({ barSize, barSpacing, horizontal }) => {
       ...barSpacingStyle,
     },
   })
-}
+})

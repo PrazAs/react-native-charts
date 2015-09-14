@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import _ from 'underscore'
 
 const DEFAULT_LABEL_COLOR = '#ccc'
 const DEFAULT_LABEL_WRAPPER_FLEX = 1
@@ -6,7 +7,7 @@ const DEFAULT_LINE_COLOR = '#dad9d4'
 const DEFAULT_UNIT_FLEX = 12
 const LABEL_FONT_SIZE = 12
 
-export default ({ completeBorder, horizontal, labelColor, labelWrapperFlex, lineColor, unitFlex }) => {
+export default _.memoize(({ completeBorder, horizontal, labelColor, labelWrapperFlex, lineColor, unitFlex }) => {
   let unitBorderStyles = {
     borderColor: lineColor || DEFAULT_LINE_COLOR,
     borderWidth: 1,
@@ -57,4 +58,4 @@ export default ({ completeBorder, horizontal, labelColor, labelWrapperFlex, line
       flex: unitFlex || DEFAULT_UNIT_FLEX,
     },
   })
-}
+})

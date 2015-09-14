@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native'
+import _ from 'underscore'
 
 const DEFAULT_FILL_COLOR = '#00b5ec'
 
-export default ({ fillColor, horizontal, maxValue, value, valueScale }) => {
+export default _.memoize(({ fillColor, horizontal, maxValue, value, valueScale }) => {
   const maximumFlex = maxValue - value
   const valueFlex = maxValue - maximumFlex
 
@@ -42,4 +43,4 @@ export default ({ fillColor, horizontal, maxValue, value, valueScale }) => {
       flex: maximumFlex,
     },
   })
-}
+})
