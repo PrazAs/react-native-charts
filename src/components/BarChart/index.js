@@ -16,7 +16,17 @@ export default class BarChart extends React.Component {
   }
 
   getStyles() {
-    return styles(this.props)
+    const {
+      barSize,
+      barSpacing,
+      horizontal,
+    } = this.props
+
+    return styles({
+      barSize,
+      barSpacing,
+      horizontal,
+    })
   }
 
   getDataSetsMaxValue() {

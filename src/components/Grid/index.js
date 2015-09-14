@@ -18,7 +18,17 @@ export default class Grid extends React.Component {
   }
 
   getStyles() {
-    return styles(this.props)
+    const {
+      horizontal,
+      labelWrapperFlex,
+      unitFlex,
+    } = this.props
+
+    return styles({
+      horizontal,
+      labelWrapperFlex,
+      unitFlex,
+    })
   }
 
   getOrderedGraduationUnitValues() {

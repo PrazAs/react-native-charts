@@ -24,8 +24,18 @@ export default class Bar extends React.Component {
   }
 
   getStyles() {
+    const {
+      fillColor,
+      horizontal,
+      maxValue,
+      value,
+    } = this.props
+
     return styles({ 
-      ...this.props,
+      fillColor,
+      horizontal,
+      maxValue,
+      value,
       valueScale: this.state.valueScale,
     })
   }

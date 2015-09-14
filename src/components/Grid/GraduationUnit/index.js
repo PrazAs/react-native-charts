@@ -4,7 +4,23 @@ import styles from './styles'
 
 export default class GraduationUnit extends React.Component {
   getStyles() {
-    return styles(this.props)
+    const {
+      completeBorder,
+      horizontal,
+      labelColor,
+      labelWrapperFlex,
+      lineColor,
+      unitFlex,
+    } = this.props
+
+    return styles({
+      completeBorder,
+      horizontal,
+      labelColor,
+      labelWrapperFlex,
+      lineColor,
+      unitFlex,
+    })
   }
 
   renderLabel() {
