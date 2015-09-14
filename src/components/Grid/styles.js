@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import _ from 'underscore'
+import memoize from 'memoizee'
 
 const DEFAULT_LABEL_COLOR = '#ccc'
 const DEFAULT_LINE_COLOR = '#dad9d4'
 
-export default _.memoize(({ horizontal, labelWrapperFlex, unitFlex }) => {
+export default memoize(({ horizontal, labelWrapperFlex, unitFlex }) => {
   let contentContainerWrapperFlexDirection
   let graduationUnitsFlexDirection
 

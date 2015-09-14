@@ -8,20 +8,20 @@ const DESTINATION_VALUE_SCALE = 1
 const VALUE_SCALE_SPRING_FRICTION = 5
 
 export default class Bar extends React.Component {
-  constructor(props) {
-    super(props)
+  // constructor(props) {
+  //   super(props)
 
-    this.state = {
-      valueScale: new Animated.Value(INITIAL_VALUE_SCALE),
-    }
-  }
+  //   this.state = {
+  //     valueScale: new Animated.Value(INITIAL_VALUE_SCALE),
+  //   }
+  // }
 
-  componentDidMount() {
-    Animated.spring(this.state.valueScale, {
-      friction: VALUE_SCALE_SPRING_FRICTION,
-      toValue: DESTINATION_VALUE_SCALE,
-    }).start()
-  }
+  // componentDidMount() {
+  //   Animated.spring(this.state.valueScale, {
+  //     friction: VALUE_SCALE_SPRING_FRICTION,
+  //     toValue: DESTINATION_VALUE_SCALE,
+  //   }).start()
+  // }
 
   getStyles() {
     const {
@@ -36,7 +36,8 @@ export default class Bar extends React.Component {
       horizontal,
       maxValue,
       value,
-      valueScale: this.state.valueScale,
+      // valueScale: this.state.valueScale,
+      valueScale: DESTINATION_VALUE_SCALE,
     })
   }
 
