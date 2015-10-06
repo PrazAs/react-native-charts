@@ -6,12 +6,10 @@ import Grid from '../Grid'
 import styles from './styles'
 
 // Configuration Constants
-const DEFAULT_GRID_GRADUATION = 1
 const DEFAULT_SHOW_GRID = true
 
 export default class BarChart extends React.Component {
   static defaultProps = {
-    gridGraduation: DEFAULT_GRID_GRADUATION,
     showGrid: DEFAULT_SHOW_GRID,
   }
 
@@ -41,12 +39,16 @@ export default class BarChart extends React.Component {
     return dataSetsMaxValue
   }
 
-  getGridMaxValue() {
-    const {
-      graduation,
-    } = this.props
-
+  getGraduation() {
     const dataSetsMaxValue = this.getDataSetsMaxValue()
+    const calculatedGraduation = Math.ceil(Math.sqrt(dataSetsMaxValue))
+
+    return this.props.graduation || calculatedGraduation
+  }
+
+  getGridMaxValue() {
+    const dataSetsMaxValue = this.getDataSetsMaxValue()
+    const graduation = this.getGraduation()
     const gridMaxValue = Math.ceil(dataSetsMaxValue / graduation) * graduation
 
     return gridMaxValue
@@ -55,11 +57,11 @@ export default class BarChart extends React.Component {
   renderGrid(children) {
     const {
       dataSets,
-      graduation,
       horizontal,
     } = this.props
 
     const gridMaxValue = this.getGridMaxValue()
+    const graduation = this.getGraduation()
 
     return (
       <Grid
