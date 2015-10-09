@@ -16,7 +16,15 @@ export default class Bar extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.animateValueScale()
+  }
+
   componentWillUpdate() {
+    this.animateValueScale()
+  }
+
+  animateValueScale() {
     // Reset value scale
     this.state.valueScale.setValue(INITIAL_VALUE_SCALE)
 

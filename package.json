@@ -1,6 +1,6 @@
 {
   "name": "react-native-charts",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Delightfully-animated data visualization.",
   "main": "src/index.js",
   "scripts": {
