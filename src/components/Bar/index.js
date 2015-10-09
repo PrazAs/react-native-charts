@@ -16,7 +16,11 @@ export default class Bar extends React.Component {
     }
   }
 
-  componentDidMount() {
+  componentWillUpdate() {
+    // Reset value scale
+    this.state.valueScale.setValue(INITIAL_VALUE_SCALE)
+
+    // Apply spring animation to value scale to its destination value
     Animated.spring(this.state.valueScale, {
       friction: VALUE_SCALE_SPRING_FRICTION,
       toValue: DESTINATION_VALUE_SCALE,
