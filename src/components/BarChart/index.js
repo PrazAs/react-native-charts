@@ -19,7 +19,7 @@ export default class BarChart extends Component {
 
   static defaultProps = {
     showGrid: true,
-  }
+  };
 
   getStyles() {
     const {
