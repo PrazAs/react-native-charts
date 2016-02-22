@@ -2,7 +2,7 @@ import Bar from './components/Bar';
 import BarChart from './components/BarChart';
 import Grid from './components/Grid';
 
-export default {
+export {
   Bar,
   BarChart,
   Grid,
