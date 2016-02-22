@@ -1,38 +1,39 @@
-import React from 'react-native'
-const { Animated, View } = React
-import styles from './styles'
+import React, { Animated, Component, PropTypes, View } from 'react-native';
+import styles from './styles';
 
-// Configuration Constants
-const INITIAL_VALUE_SCALE = 0
-const DESTINATION_VALUE_SCALE = 1
-const VALUE_SCALE_SPRING_FRICTION = 5
+export default class Bar extends Component {
+  static propTypes = {
+    destinationValueScale: PropTypes.number.isRequired,
+    fillColor: PropTypes.string.isRequired,
+    horizontal: PropTypes.bool,
+    initialValueScale: PropTypes.number.isRequired,
+    maxValue: PropTypes.number.isRequired,
+    style: View.propTypes.style,
+    value: PropTypes.number.isRequired,
+    valueScaleSpringFriction: PropTypes.number.isRequired,
+  };
 
-export default class Bar extends React.Component {
+  static defaultProps = {
+    destinationValueScale: 1,
+    fillColor: '#00b5ec',
+    initialValueScale: 0,
+    valueScaleSpringFriction: 5,
+  };
+
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      valueScale: new Animated.Value(INITIAL_VALUE_SCALE),
-    }
+      valueScale: new Animated.Value(props.initialValueScale),
+    };
   }
 
   componentDidMount() {
-    this.animateValueScale()
+    this.animateValueScale();
   }
 
   componentWillUpdate() {
-    this.animateValueScale()
-  }
-
-  animateValueScale() {
-    // Reset value scale
-    this.state.valueScale.setValue(INITIAL_VALUE_SCALE)
-
-    // Apply spring animation to value scale to its destination value
-    Animated.spring(this.state.valueScale, {
-      friction: VALUE_SCALE_SPRING_FRICTION,
-      toValue: DESTINATION_VALUE_SCALE,
-    }).start()
+    this.animateValueScale();
   }
 
   getStyles() {
@@ -41,27 +42,44 @@ export default class Bar extends React.Component {
       horizontal,
       maxValue,
       value,
-    } = this.props
+    } = this.props;
 
-    return styles({ 
+    return styles({
       fillColor,
       horizontal,
       maxValue,
       value,
       valueScale: this.state.valueScale,
-    })
+    });
+  }
+
+  animateValueScale() {
+    const {
+      destinationValueScale,
+      initialValueScale,
+      valueScaleSpringFriction,
+    } = this.props;
+
+    // Reset value scale
+    this.state.valueScale.setValue(initialValueScale);
+
+    // Apply spring animation to value scale to its destination value
+    Animated.spring(this.state.valueScale, {
+      friction: valueScaleSpringFriction,
+      toValue: destinationValueScale,
+    }).start();
   }
 
   render() {
     const {
       style,
-    } = this.props
+    } = this.props;
 
     return (
       <View style={[this.getStyles().container, style]}>
-        <Animated.View style={this.getStyles().maximum}/>
-        <Animated.View style={this.getStyles().value}/>
+        <Animated.View style={this.getStyles().maximum} />
+        <Animated.View style={this.getStyles().value} />
       </View>
-    )
+    );
   }
 }

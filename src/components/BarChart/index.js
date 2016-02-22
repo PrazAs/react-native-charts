@@ -1,16 +1,24 @@
-import React from 'react-native'
-const { View } = React
-import _ from 'underscore'
-import Bar from '../Bar'
-import Grid from '../Grid'
-import styles from './styles'
+import React, { Component, PropTypes, View } from 'react-native';
+import { flatten, max, pluck, zip } from 'underscore';
+import { dataSetPropType } from '../../constants/propTypes';
+import Bar from '../Bar';
+import Grid from '../Grid';
+import styles from './styles';
 
-// Configuration Constants
-const DEFAULT_SHOW_GRID = true
+export default class BarChart extends Component {
+  static propTypes = {
+    barSize: PropTypes.number,
+    barSpacing: PropTypes.number,
+    barStyle: View.propTypes.style,
+    dataSets: PropTypes.arrayOf(dataSetPropType).isRequired,
+    graduation: PropTypes.number,
+    horizontal: PropTypes.bool,
+    showGrid: PropTypes.bool.isRequired,
+    style: View.propTypes.style,
+  };
 
-export default class BarChart extends React.Component {
   static defaultProps = {
-    showGrid: DEFAULT_SHOW_GRID,
+    showGrid: true,
   }
 
   getStyles() {
@@ -18,50 +26,49 @@ export default class BarChart extends React.Component {
       barSize,
       barSpacing,
       horizontal,
-    } = this.props
+    } = this.props;
 
     return styles({
       barSize,
       barSpacing,
       horizontal,
-    })
+    });
   }
 
   getDataSetsMaxValue() {
     const {
       dataSets,
-    } = this.props
+    } = this.props;
 
-    const dataSetsData = _.flatten(_.pluck(dataSets, 'data'))
-    const dataSetsValues = _.pluck(dataSetsData, 'value')
-    const dataSetsMaxValue = _.max(dataSetsValues)
+    const dataSetsData = flatten(pluck(dataSets, 'data'));
+    const dataSetsValues = pluck(dataSetsData, 'value');
+    const dataSetsMaxValue = max(dataSetsValues);
 
-    return dataSetsMaxValue
+    return dataSetsMaxValue;
   }
 
   getGraduation() {
-    const dataSetsMaxValue = this.getDataSetsMaxValue()
-    const calculatedGraduation = Math.ceil(Math.sqrt(dataSetsMaxValue))
+    const dataSetsMaxValue = this.getDataSetsMaxValue();
+    const calculatedGraduation = Math.ceil(Math.sqrt(dataSetsMaxValue));
 
-    return this.props.graduation || calculatedGraduation
+    return this.props.graduation || calculatedGraduation;
   }
 
   getGridMaxValue() {
-    const dataSetsMaxValue = this.getDataSetsMaxValue()
-    const graduation = this.getGraduation()
-    const gridMaxValue = Math.ceil(dataSetsMaxValue / graduation) * graduation
+    const dataSetsMaxValue = this.getDataSetsMaxValue();
+    const graduation = this.getGraduation();
+    const gridMaxValue = Math.ceil(dataSetsMaxValue / graduation) * graduation;
 
-    return gridMaxValue
+    return gridMaxValue;
   }
 
   renderGrid(children) {
     const {
-      dataSets,
       horizontal,
-    } = this.props
+    } = this.props;
 
-    const gridMaxValue = this.getGridMaxValue()
-    const graduation = this.getGraduation()
+    const gridMaxValue = this.getGridMaxValue();
+    const graduation = this.getGraduation();
 
     return (
       <Grid
@@ -69,8 +76,9 @@ export default class BarChart extends React.Component {
         graduation={graduation}
         maxValue={gridMaxValue}
         content={children}
-        style={this.getStyles().grid}/>
-    )
+        style={this.getStyles().grid}
+      />
+    );
   }
 
   renderBars() {
@@ -78,11 +86,11 @@ export default class BarChart extends React.Component {
       barStyle,
       dataSets,
       horizontal,
-    } = this.props
+    } = this.props;
 
     // TODO: Margin/pad datasets...
-    console.log('TODO: Margin/pad datasets...')
-    const gridMaxValue = this.getGridMaxValue()
+    console.log('TODO: Margin/pad datasets...');
+    const gridMaxValue = this.getGridMaxValue();
     const dataSetsBars = dataSets.map(dataSet => {
       return dataSet.data.map((data, index) => {
         return (
@@ -92,35 +100,35 @@ export default class BarChart extends React.Component {
             horizontal={horizontal}
             value={data.value}
             maxValue={gridMaxValue}
-            style={[this.getStyles().bar, barStyle]}/>
-        )
-      })
-    })
-    const bars = _.flatten(_.zip(...dataSetsBars))
+            style={[this.getStyles().bar, barStyle]}
+          />
+        );
+      });
+    });
+    const bars = flatten(zip(...dataSetsBars));
 
     return (
       <View style={this.getStyles().bars}>
         {bars}
       </View>
-    )
+    );
   }
 
   render() {
     const {
-      dataSets,
       showGrid,
       style,
-    } = this.props
+    } = this.props;
 
-    const bars = this.renderBars()
+    const bars = this.renderBars();
     const chart = showGrid
                 ? this.renderGrid(bars)
-                : bars
+                : bars;
 
     return (
       <View style={[this.getStyles().container, style]}>
         {chart}
       </View>
-    )
+    );
   }
 }

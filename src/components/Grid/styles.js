@@ -1,19 +1,16 @@
-import { StyleSheet } from 'react-native'
-import memoize from 'memoizee'
-
-const DEFAULT_LABEL_COLOR = '#ccc'
-const DEFAULT_LINE_COLOR = '#dad9d4'
+import { StyleSheet } from 'react-native';
+import memoize from 'memoizee';
 
 export default memoize(({ horizontal, labelWrapperFlex, unitFlex }) => {
-  let contentContainerWrapperFlexDirection
-  let graduationUnitsFlexDirection
+  let contentContainerWrapperFlexDirection;
+  let graduationUnitsFlexDirection;
 
   if (horizontal) {
-    contentContainerWrapperFlexDirection = 'column'
-    graduationUnitsFlexDirection = 'row'
+    contentContainerWrapperFlexDirection = 'column';
+    graduationUnitsFlexDirection = 'row';
   } else {
-    contentContainerWrapperFlexDirection = 'row'
-    graduationUnitsFlexDirection = 'column'
+    contentContainerWrapperFlexDirection = 'row';
+    graduationUnitsFlexDirection = 'column';
   }
 
   return StyleSheet.create({
@@ -43,6 +40,6 @@ export default memoize(({ horizontal, labelWrapperFlex, unitFlex }) => {
     contentContainer: {
       backgroundColor: 'transparent',
       flex: unitFlex,
-    }
-  })
-})
+    },
+  });
+});

@@ -1,8 +1,22 @@
-import React from 'react-native'
-const { Text, View } = React
-import styles from './styles'
+import React, { Component, PropTypes, Text, View } from 'react-native';
+import styles from './styles';
 
-export default class GraduationUnit extends React.Component {
+export default class GraduationUnit extends Component {
+  static propTypes = {
+    completeBorder: PropTypes.bool,
+    horizontal: PropTypes.bool.isRequired,
+    labelColor: PropTypes.string,
+    labelWrapperFlex: PropTypes.number,
+    lineColor: PropTypes.string,
+    style: View.propTypes.style,
+    unitFlex: PropTypes.number,
+    value: PropTypes.number,
+  };
+
+  static defaultProps = {
+    horizontal: false,
+  };
+
   getStyles() {
     const {
       completeBorder,
@@ -11,7 +25,7 @@ export default class GraduationUnit extends React.Component {
       labelWrapperFlex,
       lineColor,
       unitFlex,
-    } = this.props
+    } = this.props;
 
     return styles({
       completeBorder,
@@ -20,13 +34,13 @@ export default class GraduationUnit extends React.Component {
       labelWrapperFlex,
       lineColor,
       unitFlex,
-    })
+    });
   }
 
   renderLabel() {
     const {
       value,
-    } = this.props
+    } = this.props;
 
     return (
       <View style={this.getStyles().labelWrapper}>
@@ -34,21 +48,21 @@ export default class GraduationUnit extends React.Component {
           {value}
         </Text>
       </View>
-    )
+    );
   }
 
   render() {
     const {
       horizontal,
       style,
-    } = this.props
+    } = this.props;
 
     return (
       <View style={[this.getStyles().container, style]}>
         {horizontal ? null : this.renderLabel()}
-        <View style={this.getStyles().unit}/>
+        <View style={this.getStyles().unit} />
         {horizontal ? this.renderLabel() : null}
       </View>
-    )
+    );
   }
 }

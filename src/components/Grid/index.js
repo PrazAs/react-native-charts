@@ -1,34 +1,39 @@
-import React from 'react-native'
-const { Text, View } = React
-import GraduationUnit from './GraduationUnit'
-import styles from './styles'
+import React, { Component, PropTypes, View } from 'react-native';
+import GraduationUnit from './GraduationUnit';
+import styles from './styles';
 
-// Configuration Constants
-const DEFAULT_GRADUATION = 1
-const DEFAULT_LABEL_WRAPPER_FLEX = 1
-const DEFAULT_MAX_VALUE = 10
-const DEFAULT_UNIT_FLEX = 12
+export default class Grid extends Component {
+  static propTypes = {
+    content: PropTypes.any.isRequired,
+    contentContainerStyle: View.propTypes.style,
+    graduation: PropTypes.number.isRequired,
+    horizontal: PropTypes.bool.isRequired,
+    labelWrapperFlex: PropTypes.number.isRequired,
+    lineColor: PropTypes.string,
+    maxValue: PropTypes.number.isRequired,
+    style: View.propTypes.style,
+    unitFlex: PropTypes.number.isRequired,
+  };
 
-export default class Grid extends React.Component {
   static defaultProps = {
-    graduation: DEFAULT_GRADUATION,
-    labelWrapperFlex: DEFAULT_LABEL_WRAPPER_FLEX,
-    maxValue: DEFAULT_MAX_VALUE,
-    unitFlex: DEFAULT_UNIT_FLEX,
-  }
+    graduation: 1,
+    labelWrapperFlex: 1,
+    maxValue: 10,
+    unitFlex: 12,
+  };
 
   getStyles() {
     const {
       horizontal,
       labelWrapperFlex,
       unitFlex,
-    } = this.props
+    } = this.props;
 
     return styles({
       horizontal,
       labelWrapperFlex,
       unitFlex,
-    })
+    });
   }
 
   getOrderedGraduationUnitValues() {
@@ -36,21 +41,22 @@ export default class Grid extends React.Component {
       horizontal,
       graduation,
       maxValue,
-    } = this.props
+    } = this.props;
 
-    const graduationUnitsCount = graduation > 0 
+    const graduationUnitsCount = graduation > 0
                                 ? Math.ceil(maxValue / graduation)
-                                : 1
+                                : 1;
 
     // Generate an iterable array of length `graduationUnitsCount` and map it
     // to graduation unit values...
-    const graduationUnitValues = Array.apply(null, Array(graduationUnitsCount)).map((value, index) => {
-      return graduation * (index + 1)
-    })
+    const graduationUnitValues = Array.apply(null, Array(graduationUnitsCount))
+      .map((value, index) => {
+        return graduation * (index + 1);
+      });
 
     return !horizontal
             ? graduationUnitValues.reverse()
-            : graduationUnitValues
+            : graduationUnitValues;
   }
 
   renderGraduationUnits() {
@@ -59,27 +65,28 @@ export default class Grid extends React.Component {
       labelWrapperFlex,
       lineColor,
       unitFlex,
-    } = this.props
+    } = this.props;
 
-    const orderedGraduationUnitValues = this.getOrderedGraduationUnitValues()
-    const lastGraduationUnitIndex = orderedGraduationUnitValues.length - 1
+    const orderedGraduationUnitValues = this.getOrderedGraduationUnitValues();
+    const lastGraduationUnitIndex = orderedGraduationUnitValues.length - 1;
 
     return (
       <View style={this.getStyles().graduationUnits}>
         {this.getOrderedGraduationUnitValues().map((value, index) => (
-          <GraduationUnit 
+          <GraduationUnit
             key={value}
-            completeBorder={(horizontal 
-                            ? index >= lastGraduationUnitIndex 
+            completeBorder={(horizontal
+                            ? index >= lastGraduationUnitIndex
                             : index === 0)}
             horizontal={horizontal}
             labelWrapperFlex={labelWrapperFlex}
             lineColor={lineColor}
             unitFlex={unitFlex}
-            value={value}/>
+            value={value}
+          />
         ))}
       </View>
-    )
+    );
   }
 
   renderContentContainer() {
@@ -87,33 +94,30 @@ export default class Grid extends React.Component {
       content,
       contentContainerStyle,
       horizontal,
-    } = this.props
+    } = this.props;
 
     return (
       <View style={this.getStyles().contentContainerWrapper}>
-        {horizontal ? null : <View style={this.getStyles().contentContainerLabelWrapperOffset}/>}
+        {horizontal ? null : <View style={this.getStyles().contentContainerLabelWrapperOffset} />}
         <View style={[this.getStyles().contentContainer, contentContainerStyle]}>
           {content}
         </View>
-        {horizontal ? <View style={this.getStyles().contentContainerLabelWrapperOffset}/> : null}
+        {horizontal ? <View style={this.getStyles().contentContainerLabelWrapperOffset} /> : null}
       </View>
-    )
+    );
   }
 
   render() {
-    const {
-      content,
-      style,
-    } = this.props
+    const { style } = this.props;
 
     // TODO: Add container for data set data (bar group) labels...
-    console.log('TODO: Add container for data set data (bar group) labels...')
+    console.log('TODO: Add container for data set data (bar group) labels...');
     // - Should render with respect to bar locations so to visually align them
     return (
       <View style={[this.getStyles().container, style]}>
         {this.renderGraduationUnits()}
         {this.renderContentContainer()}
       </View>
-    )
+    );
   }
 }
