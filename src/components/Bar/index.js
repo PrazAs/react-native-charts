@@ -32,8 +32,15 @@ export default class Bar extends Component {
     this.animateValueScale();
   }
 
-  componentWillUpdate() {
-    this.animateValueScale();
+  componentWillUpdate(nextProps) {
+    const maxValueWillChange = nextProps.maxValue !== this.props.maxValue;
+    const valueWillChange = nextProps.value !== this.props.value;
+    const shouldAnimate = maxValueWillChange || valueWillChange;
+
+    // Only animate value scale if relative value changes
+    if (shouldAnimate) {
+      this.animateValueScale();
+    }
   }
 
   getStyles() {
