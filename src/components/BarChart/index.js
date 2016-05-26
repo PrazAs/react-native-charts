@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, View } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View } from 'react-native';
 import { flatten, max, pluck, zip } from 'underscore';
 import { dataSetPropType } from '../../constants/propTypes';
 import Bar from '../Bar';

@@ -1,4 +1,4 @@
-import { PropTypes } from 'react-native';
+import { PropTypes } from 'react';
 
 export const dataSetEntryPropType = PropTypes.shape({
   value: PropTypes.number.isRequired,

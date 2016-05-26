@@ -1,4 +1,5 @@
-import React, { Component, PropTypes, View } from 'react-native';
+import React, { Component, PropTypes } from 'react';
+import { View } from 'react-native';
 import GraduationUnit from './GraduationUnit';
 import styles from './styles';
 
